@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 
 import { validate } from '../../../common/validate'
 import { UserRegisterDto } from '../dto'
-import { UserRegisterService } from '../service/user-register.service'
+import { UserRegisterService } from '../service'
 
 export class UserRegisterController {
   constructor(private readonly service: UserRegisterService) {}

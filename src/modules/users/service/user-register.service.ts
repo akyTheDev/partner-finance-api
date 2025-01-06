@@ -29,10 +29,8 @@ export class UserRegisterService {
    * @throws {ConflictError} if the email is already in use.
    */
   private async checkEmail(email: string): Promise<void> {
-    const existingUser = await this.userRepository.find({
-      email,
-    })
-    if (existingUser && existingUser.length > 0) {
+    const existingUser = await this.userRepository.findByEmail(email)
+    if (existingUser !== undefined) {
       throw new ConflictError('Email already in use.')
     }
   }
