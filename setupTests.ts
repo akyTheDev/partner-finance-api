@@ -1,0 +1,7 @@
+process.env.PORT = '8000'
+process.env.JWT_SECRET = 'supersecret'
+process.env.DB_HOST = 'localhost'
+process.env.DB_USERNAME = 'admin'
+process.env.DB_PASSWORD = 'password'
+process.env.DB_NAME = 'postgres'
+process.env.DB_PORT = '5432'
