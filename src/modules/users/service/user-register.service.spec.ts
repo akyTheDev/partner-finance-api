@@ -16,7 +16,7 @@ describe('UserRegisterService', () => {
     passwordHashSpy.mockResolvedValue('hashedPassword')
 
     userRepositoryMock = {
-      find: jest.fn().mockResolvedValue(undefined),
+      findByEmail: jest.fn().mockResolvedValue(undefined),
       create: jest.fn().mockResolvedValue(undefined),
     } as unknown as jest.Mocked<UserRepository>
 
@@ -37,9 +37,7 @@ describe('UserRegisterService', () => {
     it('should hash the password, generate userId, and insert the user into the DB', async () => {
       await userRegisterService.register(user)
 
-      expect(userRepositoryMock.find).toHaveBeenCalledWith({
-        email: user.email,
-      })
+      expect(userRepositoryMock.findByEmail).toHaveBeenCalledWith(user.email)
       expect(passwordHashSpy).toHaveBeenCalledWith(user.password, 10)
       expect(userRepositoryMock.create).toHaveBeenCalledWith({
         ...user,
@@ -48,21 +46,17 @@ describe('UserRegisterService', () => {
     })
 
     it('should throw ConflictError if email is already in use', async () => {
-      userRepositoryMock.find.mockResolvedValueOnce([
-        {
-          email: 'test@example.com',
-          name: 'Name',
-          password: 'Password',
-        },
-      ] as UserModel[])
+      userRepositoryMock.findByEmail.mockResolvedValueOnce({
+        email: 'test@example.com',
+        name: 'Name',
+        password: 'Password',
+      } as UserModel)
 
       await expect(userRegisterService.register(user)).rejects.toThrow(
         ConflictError,
       )
 
-      expect(userRepositoryMock.find).toHaveBeenCalledWith({
-        email: user.email,
-      })
+      expect(userRepositoryMock.findByEmail).toHaveBeenCalledWith(user.email)
       expect(bcrypt.hash).not.toHaveBeenCalled()
       expect(userRepositoryMock.create).not.toHaveBeenCalled()
       expect(userRepositoryMock.create).not.toHaveBeenCalled()

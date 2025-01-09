@@ -2,9 +2,6 @@ import { faker } from '@faker-js/faker'
 
 import { testRequest } from '../setup'
 
-const randomEmail = faker.internet.email()
-console.log(randomEmail) // Example: john.doe@example.org
-
 describe('User E2E', () => {
   describe('Register', () => {
     it('should return an error if validation fails', async () => {

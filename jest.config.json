@@ -10,5 +10,5 @@
   "testEnvironment": "node",
   "setupFilesAfterEnv": ["../setupTests.ts"],
   "collectCoverage": true,
-  "coveragePathIgnorePatterns": ["/src/modules/.*/repository/", "src/server.ts"]
+  "coveragePathIgnorePatterns": ["src/server.ts"]
 }
