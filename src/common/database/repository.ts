@@ -1,30 +1,34 @@
+import { Knex } from 'knex'
 import { psqlKnexConnection } from './connection'
 
 /* istanbul ignore file */
-export class BaseRepository<T> {
-  constructor(protected readonly tableName: string) {}
+export abstract class BaseRepository<T> {
+  protected readonly connection: Knex
+  constructor(protected readonly tableName: string) {
+    this.connection = psqlKnexConnection
+  }
 
   async findAll(): Promise<T[]> {
-    return psqlKnexConnection(this.tableName).select('*')
+    return this.connection(this.tableName).select('*')
   }
 
   async findById(id: number): Promise<T | undefined> {
-    return psqlKnexConnection(this.tableName).where({ id }).first()
+    return this.connection(this.tableName).where({ id }).first()
   }
 
   async find(filters: Partial<T>): Promise<T[]> {
-    return psqlKnexConnection(this.tableName).where(filters)
+    return this.connection(this.tableName).where(filters)
   }
 
   async create(data: Partial<T>): Promise<T> {
-    return psqlKnexConnection(this.tableName)
+    return this.connection(this.tableName)
       .insert(data)
       .returning('*')
       .then((rows) => rows[0])
   }
 
   async update(id: number, data: Partial<T>): Promise<T> {
-    return psqlKnexConnection(this.tableName)
+    return this.connection(this.tableName)
       .where({ id })
       .update(data)
       .returning('*')
@@ -32,6 +36,6 @@ export class BaseRepository<T> {
   }
 
   async delete(id: number): Promise<void> {
-    await psqlKnexConnection(this.tableName).where({ id }).del()
+    await this.connection(this.tableName).where({ id }).del()
   }
 }
