@@ -7,7 +7,7 @@
     "build": "npx tsc",
     "start": "node dist/index.js",
     "dev": "nodemon src/server.ts",
-    "test": "jest --config jest.config.json",
+    "test": "jest --detectOpenHandles --config jest.config.json --forceExit",
     "test:e2e": "jest --config jest-e2e.config.js --runInBand --forceExit",
     "merge-coverage-report-jsons": "istanbul-merge --out ./coverage/temp/coverage-final.json ./coverage/default/coverage-final.json ./coverage/e2e/coverage-final.json",
     "generate-coverage-all-packages": "nyc report --reporter=html --reporter=text --reporter=lcov --reporter=clover --report-dir=./coverage/all --temp-dir=./coverage/temp",

@@ -8,6 +8,5 @@ CREATE TABLE users (
 );
 
 CREATE INDEX users_email_ids ON users (email);
-
 SELECT setval('users_id_seq', 1000);
 
