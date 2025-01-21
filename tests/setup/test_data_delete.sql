@@ -1,3 +1,6 @@
+DELETE FROM partners_invitations
+  WHERE inviter_user_id in (1);
+
 DELETE FROM partners_users 
   where user_id in (1,2);
 
