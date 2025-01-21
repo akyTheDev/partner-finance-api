@@ -1,2 +1,5 @@
+export { InviteDto } from './invite.dto'
+export { GetInviteDto } from './get-invite.dto'
 export { PartnerCreateDto } from './partner-create.dto'
 export { PartnerGetOneDto } from './partner-get-one.dto'
+export { ResponseInvitationDto } from './response-invitation.dto'

@@ -1,6 +1,6 @@
 import { Server } from 'http'
-import request from 'supertest'
 import jwt from 'jsonwebtoken'
+import request from 'supertest'
 
 import app from '../src/app'
 import { config } from '../src/common/config'

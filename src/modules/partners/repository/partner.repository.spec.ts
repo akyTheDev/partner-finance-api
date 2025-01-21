@@ -1,5 +1,6 @@
-import { PartnerRepository } from './partner.repository'
 import { faker } from '@faker-js/faker'
+
+import { PartnerRepository } from './partner.repository'
 import { psqlKnexConnection } from '../../../common/database/connection'
 
 describe('PartnerRepository', () => {

@@ -49,3 +49,31 @@ INSERT INTO partners_users (
     1,
     20
   );
+
+INSERT INTO partners_invitations (
+  id,
+  inviter_user_id,
+  invitee_user_id,
+  partner_id,
+  status
+) VALUES (
+    1,
+    1,
+    2,
+    10,
+    'accepted'
+  ),
+  (
+    2,
+    1,
+    3,
+    20,
+    'declined'
+  ),
+  (
+    3,
+    1,
+    3,
+    20,
+    'pending'
+  );

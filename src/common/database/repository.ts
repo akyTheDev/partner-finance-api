@@ -1,4 +1,5 @@
 import { Knex } from 'knex'
+
 import { psqlKnexConnection } from './connection'
 
 /* istanbul ignore file */
